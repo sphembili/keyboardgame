@@ -105,6 +105,8 @@ function gameOver() {
 
         clearInterval(rep)
 
+        document.getElementById("highScore").innerText = document.getElementById("score").innerText
+
         swal({
             title: "Game Over",
             text: "You failed and you are bad at this. Do you want another chance?",
