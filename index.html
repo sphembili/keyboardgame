@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
     <title>Keyboard Game By S Mbili</title>
 </head>
+
 <body>
-    
+
     <h1 class="text-center text-3xl font-bold">Learn To Type</h1>
 
-    <hr/>
+    <hr />
 
-    <h3 class="text-center text-xl mt-16 font-bold" >
-        Score:
-        <span id="score" class="text-green-700" >0</span>
+    <h3 class="text-center text-xl mt-16 font-bold">
+        Player:
+        <span id="player" class="text-green-700">0</span>
     </h3>
 
-    <canvas
-    class="border-2 border-indigo-600 mx-auto"
-     id="game" 
-     width="500" 
-     height="500" 
-     ></canvas>
-     
+    <button id="start" class="mx-auto bg-blue-600 text-white rounded-md px-10 py-2" type="button">Start</button>
+
+    <h3 class="text-center text-xl mt-16 font-bold">
+        Score:
+        <span id="score" class="text-green-700">0</span>
+    </h3>
+
+    <canvas class="border-2 border-indigo-600 mx-auto" id="game" width="500" height="500"></canvas>
+
 </body>
 
-<script  src="game.js"  ></script>
+<script src="game.js"></script>
 
 </html>

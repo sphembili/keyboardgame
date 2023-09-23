@@ -2,16 +2,18 @@ let game = document.getElementById("game")
 
 let ctx = game.getContext("2d")
 
-let x = game.width /2
-let y = game.height /2
+let x = game.width / 2
+let y = game.height / 2
 
 let ballRadius = 20
 let dy = -1.2
 
-let level  = 1
+let level = 1
+
+document.getElementById("player").innerText = prompt("Your name")
 
 
-function randomLetter(){
+function randomLetter() {
     let alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     return alphabets[Math.floor(Math.random() * alphabets.length)]
@@ -19,7 +21,7 @@ function randomLetter(){
 
 let letter = randomLetter()
 
-function drawball(){
+function drawball() {
     ctx.clearRect(0, 0, game.width, game.height)
 
     ctx.beginPath()
@@ -36,10 +38,10 @@ function drawball(){
 
     ctx.fillStyle = "white"
 
-    ctx.fillText(letter, x-10, y+10)
+    ctx.fillText(letter, x - 10, y + 10)
 }
 
-function update(){
+function update() {
 
     ctx.clearRect(0, 0, game.width, game.height)
 
@@ -52,34 +54,54 @@ function update(){
     gameOver()
 }
 
-document.addEventListener("keydown", function(event){
+document.addEventListener("keydown", function (event) {
     let keyPressed = event.key.toUpperCase()
 
-    console.log({letter, keyPressed})
+    console.log({ letter, keyPressed })
 
-    if(keyPressed === letter){
+    if (keyPressed === letter) {
         dy = -dy
-        
+
         let score = document.getElementById("score")
-        score.innerText  = parseInt(score.innerText) + 1
+        score.innerText = parseInt(score.innerText) + 1
 
         // if(parseInt(score.innerText) === 10){
         //     level += 1
         // }
 
         letter = randomLetter()
-    } else{
+    } else {
 
         level += 0.005
     }
 })
 
 
-let rep = setInterval(update, 1000/100)
+let rep
 
 
-function gameOver (){
-    if(y + ballRadius > game.height){
+document.getElementById("start").addEventListener(
+    "click",
+    function () {
+
+        if (document.getElementById("start").innerText === "Start") {
+
+            document.getElementById("start").innerText = "Pause"
+
+            rep = setInterval(update, 1000 / 100)
+
+        }else{
+            document.getElementById("start").innerText = "Start"
+            clearInterval(rep)
+        }
+
+
+    }
+)
+
+
+function gameOver() {
+    if (y + ballRadius > game.height) {
 
         clearInterval(rep)
 
@@ -89,20 +111,20 @@ function gameOver (){
             icon: "error",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
+        })
+            .then((willDelete) => {
+                if (willDelete) {
 
-                dy = -dy
-                rep = setInterval(update, 1000/100)
+                    dy = -dy
+                    rep = setInterval(update, 1000 / 100)
 
-            } else {
-              swal("Quitter", "Bye you are bad at this anyway", "error");
-            }
-          });
+                } else {
+                    swal("Quitter", "Bye you are bad at this anyway", "error");
+                }
+            });
     }
 
-    if(y + ballRadius < 0){
+    if (y + ballRadius < 0) {
         clearInterval(rep)
 
         swal({
@@ -111,16 +133,16 @@ function gameOver (){
             icon: "error",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
+        })
+            .then((willDelete) => {
+                if (willDelete) {
 
-                dy = -dy
-                rep = setInterval(update, 1000/100)
+                    dy = -dy
+                    rep = setInterval(update, 1000 / 100)
 
-            } else {
-              swal("Quitter", "Bye you are bad at this anyway", "error");
-            }
-          });
+                } else {
+                    swal("Quitter", "Bye you are bad at this anyway", "error");
+                }
+            });
     }
 }
